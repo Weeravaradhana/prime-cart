@@ -33,7 +33,6 @@ public final class AuthenticatedUser {
     }
 
     public static Username username() {
-        System.out.println("username"+PREFERRED_USERNAME);
         return optionalUsername().orElseThrow(NotAuthenticatedUserException::new);
     }
 
@@ -97,8 +96,7 @@ public final class AuthenticatedUser {
         Object resourceAccessObj = jwt.getClaim("resource_access");
         if (!(resourceAccessObj instanceof Map<?, ?> resourceAccess)) return Collections.emptyList();
 
-        // Replace "account" with your clientId configured in Keycloak
-        Map<String, Object> clientAccess = (Map<String, Object>) resourceAccess.get("ecomhub");
+        Map<String, Object> clientAccess = (Map<String, Object>) resourceAccess.get("prime-cart");
         if (clientAccess == null) return Collections.emptyList();
 
         List<String> roles = (List<String>) clientAccess.get("roles");
